@@ -1,0 +1,14 @@
+{
+    "builtin": "False",
+    "default_enabled": "True",
+    "type": "extension",
+    "rocket_mode_compatible": "False",
+    "name": "LCADNFT",
+    "description": "Master Thesis Architecture - Erich Domme - WiSe 2023/24",
+    "author": "Erich Domme",
+    "author_profile": "https://github.com/ErichDomme",
+    "url": "https://github.com/ErichDomme/LCADNFT",
+    "website": "https://github.com/ErichDomme",
+    "image": "",
+    "dependencies": []
+}
