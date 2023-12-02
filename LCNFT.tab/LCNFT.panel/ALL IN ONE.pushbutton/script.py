@@ -16,6 +16,8 @@ from System.Windows.Forms import FolderBrowserDialog, DialogResult
 from Microsoft.VisualBasic import Interaction
 from System.Net import WebClient, WebHeaderCollection, WebException
 from System.Text import Encoding
+from System.IO import StreamReader
+
 
 # Function to export IFC
 def export_to_ifc(doc, export_folder, filename):
@@ -59,7 +61,14 @@ def pin_file_to_ipfs(file_path):
         response_string = Encoding.UTF8.GetString(response)
         return json.loads(response_string)
     except WebException as e:
-        return str(e.Response.GetResponseStream().ReadToEnd())
+        if e.Response is not None:
+            response_stream = e.Response.GetResponseStream()
+            reader = StreamReader(response_stream)
+            response_text = reader.ReadToEnd()
+            return response_text
+        else:
+            return str(e)
+
 
 
 # Function to ask user if they want to retain local file
