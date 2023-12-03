@@ -6,8 +6,8 @@ from System.Text import Encoding
 from System.Net import WebClient
 
 def preprocess_xml_data(data):
-    # Replace  with a suitable replacement or remove it
-    return data.replace(u"\u2122", "")  # Removing  symbol
+    # Replace ™ with a suitable replacement or remove it
+    return data.replace(u"\u2122", "")  # Removing ™ symbol
 
 def get_api_data(url):
     client = WebClient()
@@ -39,9 +39,9 @@ def parse_xml_and_print(data):
             name = name_elem.text if name_elem is not None else "Name not found"
 
             class_elem = material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
-            class_id = class_elem.get('classId') if class_elem is not None else "Class ID not found"
+            class_name = class_elem.text if class_elem is not None else "Class name not found"
 
-            print("UUID: {0}, Name: {1}, Class ID at level 0: {2}".format(uuid, name, class_id))
+            print("UUID: {0}, Name: {1}, Class Name at level 0: {2}".format(uuid, name, class_name))
 
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
