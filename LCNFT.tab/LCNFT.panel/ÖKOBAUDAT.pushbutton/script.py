@@ -1,6 +1,8 @@
 import clr
 import xml.etree.ElementTree as ET
 clr.AddReference('System.Net')
+clr.AddReference('mscorlib')  # Adding reference to mscorlib which contains System namespace
+from System import Text  # Importing Text from System namespace
 from System.Net import WebClient
 
 def preprocess_xml_data(data):
@@ -9,7 +11,7 @@ def preprocess_xml_data(data):
 
 def get_api_data(url):
     client = WebClient()
-    client.Encoding = System.Text.Encoding.UTF8
+    client.Encoding = Text.Encoding.UTF8  # Set UTF-8 encoding directly
     try:
         data = client.DownloadString(url)
         # Preprocess the data to handle special characters
