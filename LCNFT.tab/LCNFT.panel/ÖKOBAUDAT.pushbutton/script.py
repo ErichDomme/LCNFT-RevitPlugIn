@@ -26,7 +26,8 @@ def parse_xml_and_print(data):
         root = ET.fromstring(data)
         namespaces = {
             'ns0': 'http://www.ilcd-network.org/ILCD/ServiceAPI/Process',
-            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI'
+            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI',
+            'xml': 'http://www.w3.org/XML/1998/namespace'  # Adding the 'xml' namespace
         }
 
         # Find the first material process
@@ -34,6 +35,7 @@ def parse_xml_and_print(data):
 
         if first_material is not None:
             uuid = first_material.find('ns3:uuid', namespaces).text
+            # Adjusted XPath query to include the 'xml' namespace for language
             name = first_material.find('ns3:name[@xml:lang="en"]', namespaces).text
             class_id = first_material.find('ns3:classification/ns3:class[@level="0"]', namespaces).get('classId')
 
