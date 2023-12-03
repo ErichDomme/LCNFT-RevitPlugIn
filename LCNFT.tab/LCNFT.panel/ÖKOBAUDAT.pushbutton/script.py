@@ -1,11 +1,14 @@
 import clr
 import xml.etree.ElementTree as ET
 clr.AddReference('System.Net')
+clr.AddReference('System.Text')
 from System.Net import WebClient
+from System.Text import Encoding
 
 # Function to get the XML data from the API
 def get_api_data(url):
     client = WebClient()
+    client.Encoding = Encoding.UTF8  # Ensure UTF-8 encoding is used
     try:
         data = client.DownloadString(url)
         return data
