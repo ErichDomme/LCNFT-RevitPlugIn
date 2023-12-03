@@ -1,6 +1,8 @@
 import clr
 import xml.etree.ElementTree as ET
+clr.AddReference('System')
 clr.AddReference('System.Net')
+from System.Text import Encoding
 from System.Net import WebClient
 
 def preprocess_xml_data(data):
@@ -9,7 +11,7 @@ def preprocess_xml_data(data):
 
 def get_api_data(url):
     client = WebClient()
-    client.Encoding = System.Text.Encoding.UTF8
+    client.Encoding = Encoding.UTF8
     try:
         data = client.DownloadString(url)
         # Preprocess the data to handle special characters
@@ -23,8 +25,8 @@ def parse_xml_and_print(data):
     try:
         root = ET.fromstring(data)
         namespaces = {
-            'ns0': 'http://www.ilcd-network.org/ILCD/ServiceAPI/Process',  # Adjusted namespace
-            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI'  # Adjusted namespace
+            'ns0': 'http://www.ilcd-network.org/ILCD/ServiceAPI/Process',
+            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI'
         }
 
         # Find the first material process
