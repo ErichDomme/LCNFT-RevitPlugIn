@@ -1,22 +1,24 @@
 import clr
 import xml.etree.ElementTree as ET
 clr.AddReference('System.Net')
-clr.AddReference('System')
-from System import Text
 from System.Net import WebClient
 
-# Function to get the XML data from the API
+def preprocess_xml_data(data):
+    # Replace ™ with a suitable replacement or remove it
+    return data.replace(u"\u2122", "")  # Removing ™ symbol
+
 def get_api_data(url):
     client = WebClient()
-    client.Encoding = Text.Encoding.UTF8  # Set UTF-8 encoding directly
+    client.Encoding = System.Text.Encoding.UTF8
     try:
         data = client.DownloadString(url)
-        return data
+        # Preprocess the data to handle special characters
+        processed_data = preprocess_xml_data(data)
+        return processed_data
     except Exception as e:
         print("Error fetching data: {0}".format(str(e)))
         return None
 
-# Function to parse the XML and extract the desired information
 def parse_xml_and_print(data):
     try:
         root = ET.fromstring(data)
@@ -39,7 +41,6 @@ def parse_xml_and_print(data):
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
 
-# Main function to execute
 def main():
     url = 'https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes'
     xml_data = get_api_data(url)
