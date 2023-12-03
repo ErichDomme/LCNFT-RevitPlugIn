@@ -1,13 +1,17 @@
 import xml.etree.ElementTree as ET
-import requests
+import clr
+clr.AddReference('System.Net')
+from System.Net import WebClient
 
-# Make the GET request
-response = requests.get('https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes')
+# Use WebClient to download the data
+client = WebClient()
 
-# Check if the request was successful
-if response.status_code == 200 and response.content:
+try:
+    # Download the data as a string
+    data = client.DownloadString('https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes')
+    
     # Parse the XML response
-    root = ET.fromstring(response.content)
+    root = ET.fromstring(data)
 
     # Now you can iterate over the elements and extract data
     for process in root.findall('{http://www.ilcd-network.org/ILCD/ServiceAPI}process'):
@@ -17,9 +21,9 @@ if response.status_code == 200 and response.content:
         for name in names:
             lang = name.attrib['{http://www.w3.org/XML/1998/namespace}lang']
             value = name.text
-            print(f"Name ({lang}): {value}")
+            print("Name ({0}): {1}".format(lang, value))
         
         # Add additional parsing as needed for your application
 
-else:
-    print('Failed to retrieve data:', response.status_code)
+except Exception as e:
+    print("Failed to fetch materials: {0}".format(e.Message))
