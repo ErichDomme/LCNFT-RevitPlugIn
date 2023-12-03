@@ -25,17 +25,23 @@ def parse_xml_and_print(data):
     try:
         root = ET.fromstring(data)
         namespaces = {
-            'sapi': 'http://www.ilcd-network.org/ILCD/ServiceAPI',  # add other namespaces if needed
+            'sapi': 'http://www.ilcd-network.org/ILCD/ServiceAPI',  # Make sure this is correct
         }
+
+        # Debugging: print root element tag
+        print("Root element:", root.tag)
 
         # Find the first material process
         first_material = root.find('sapi:process', namespaces)
+
         if first_material is not None:
+            # More debugging: print first_material tag
+            print("First material tag:", first_material.tag)
+
             uuid = first_material.find('sapi:uuid', namespaces).text
             name = first_material.find('sapi:name', namespaces).text
             class_id = first_material.find('sapi:classification/sapi:class[@level="0"]', namespaces).get('classId')
 
-            # Print the extracted information
             print("UUID: {0}, Name: {1}, Class ID at level 0: {2}".format(uuid, name, class_id))
         else:
             print("No material found")
