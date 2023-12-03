@@ -26,4 +26,4 @@ try:
         # Add additional parsing as needed for your application
 
 except Exception as e:
-    print("Failed to fetch materials: {0}".format(e.Message))
+    print("Failed to fetch materials: {0}".format(str(e)))
