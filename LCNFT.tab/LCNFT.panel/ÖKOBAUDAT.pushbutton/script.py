@@ -1,29 +1,24 @@
 import xml.etree.ElementTree as ET
-import clr
-clr.AddReference('System.Net')
-from System.Net import WebClient
 
-# Use WebClient to download the data
-client = WebClient()
+# Sample XML string (replace this with the actual XML response)
+xml_data = '''<sapi:dataSetList xmlns:sapi="http://www.ilcd-network.org/ILCD/ServiceAPI">...</sapi:dataSetList>'''
 
-try:
-    # Download the data as a string
-    data = client.DownloadString('https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes')
-    
-    # Save raw XML content to a file for inspection (if necessary)
-    # Make sure to specify the correct path where the script has write permissions
-    with open('C:\\path\\to\\your\\directory\\raw_xml_output.xml', 'w') as file:
-        file.write(data)
-    
-    # Parse the XML response
-    root = ET.fromstring(data)
+# Parse the XML
+root = ET.fromstring(xml_data)
 
-    # Now you can iterate over the elements and extract data
-    for process in root.findall('{http://www.ilcd-network.org/ILCD/ServiceAPI}process'):
-        # Extract details here
-        # Make sure to replace this comment with actual parsing code
+# Define your namespaces
+namespaces = {
+    'sapi': 'http://www.ilcd-network.org/ILCD/ServiceAPI',
+    # Add other namespaces as needed
+}
 
-except ET.ParseError as pe:
-    print("Failed to parse XML: {0}".format(pe))
-except Exception as e:
-    print("Failed to fetch materials: {0}".format(str(e)))
+# Iterate through each dataset
+for dataset in root.findall('sapi:process', namespaces):
+    # Extract the necessary information
+    uuid = dataset.find('sapi:uuid', namespaces).text
+    names = dataset.findall('sapi:name', namespaces)
+    for name in names:
+        lang = name.attrib['{http://www.w3.org/XML/1998/namespace}lang']
+        value = name.text
+        print(f"Name ({lang}): {value}")
+    # Extract other attributes as needed
