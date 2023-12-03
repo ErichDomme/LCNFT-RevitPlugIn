@@ -53,7 +53,7 @@ def parse_materials(data):
 class MaterialSelectionForm(Form):
     def __init__(self, materialsByClass):
         self.Text = "Select Materials"
-        self.Width = 300
+        self.Width = 800
         self.Height = 400
 
         self.checkedListBox = CheckedListBox()
