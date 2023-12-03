@@ -4,9 +4,14 @@ clr.AddReference('System')
 clr.AddReference('System.Windows.Forms')
 clr.AddReference('System.Drawing')
 clr.AddReference('System.Net')
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitServices')
 from System.Text import Encoding
 from System.Net import WebClient
 from System.Windows.Forms import Application, Form, TreeView, TreeNode, Button, DockStyle
+from Autodesk.Revit.DB import Material, Transaction
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
 
 def preprocess_xml_data(data):
     data = data.replace(u"\u2122", "")  # Removing "trademark" symbol
@@ -88,9 +93,30 @@ class MaterialSelectionForm(Form):
         for class_node in self.treeView.Nodes:
             for material_node in class_node.Nodes:
                 if material_node.Checked:
-                    selected_materials.append(material_node.Text)
-        print(selected_materials)  # For testing purposes
+                    selected_materials.append({
+                        "name": material_node.Text.split(" (")[0],  # Assuming name is before " (UUID)"
+                        "uuid": material_node.Text.split("(")[-1].rstrip(")")  # Assuming UUID is inside parentheses
+                    })
+        
+        # Call the function to create materials in Revit
+        self.create_materials_in_revit(selected_materials)
         self.Close()
+
+    def create_materials_in_revit(self, materials):
+        doc = DocumentManager.Instance.CurrentDBDocument
+        TransactionManager.Instance.EnsureInTransaction(doc)
+        
+        for mat_info in materials:
+            try:
+                # Create a new material
+                mat = Material.Create(doc, mat_info["name"])
+                # Set the material's comments to the UUID
+                mat_elem = doc.GetElement(mat)
+                mat_elem.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS).Set(mat_info["uuid"])
+            except Exception as e:
+                print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
+
+        TransactionManager.Instance.TransactionTaskDone()
 
 def main():
     url = 'https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes'
