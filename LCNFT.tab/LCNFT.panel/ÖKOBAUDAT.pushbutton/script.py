@@ -114,25 +114,27 @@ class MaterialSelectionForm(Form):
         self.Close()
 
     def create_materials_in_revit(self, materials):
-        doc = DocumentManager.Instance.CurrentDBDocument
+        # Ensure you get the current document reference directly from the __revit__ global variable
+        doc = __revit__.ActiveUIDocument.Document
 
         # Start a transaction to create materials in Revit
-        TransactionManager.Instance.EnsureInTransaction(doc)
+        t = Transaction(doc, "Create Materials")
+        t.Start()
 
         for mat_info in materials:
             try:
                 # Create a new material
-                new_mat_id = Material.Create(doc, mat_info["name"])
-                new_mat = doc.GetElement(new_mat_id)
+                new_mat = Material.Create(doc, mat_info["name"])
+                new_mat = doc.GetElement(new_mat.Id)
 
                 # Set the material's comments to the UUID
                 comment_param = new_mat.LookupParameter("Comments")
-                if comment_param is not None and not comment_param.IsReadOnly:
+                if comment_param and not comment_param.IsReadOnly:
                     comment_param.Set(mat_info["uuid"])
             except Exception as e:
                 print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
 
-        TransactionManager.Instance.TransactionTaskDone()
+        t.Commit()
 
 # Main function
 def main():
