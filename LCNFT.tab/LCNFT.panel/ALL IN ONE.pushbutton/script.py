@@ -16,11 +16,13 @@ from System.Windows.Forms import FolderBrowserDialog, DialogResult
 from Microsoft.VisualBasic import Interaction
 from System.Net import WebClient, WebHeaderCollection, WebException
 from System.Text import Encoding
+from System.IO import StreamReader
+
 
 # Function to export IFC
 def export_to_ifc(doc, export_folder, filename):
     ifc_options = IFCExportOptions()
-    ifc_options.FileVersion = IFCVersion.IFC2x3
+    ifc_options.FileVersion = IFCVersion.IFC4x3
     doc.Export(export_folder, filename, ifc_options)
 
 
@@ -47,8 +49,8 @@ def get_filename_from_user(export_folder):
 # Function to upload file to IPFS using Pinata
 def pin_file_to_ipfs(file_path):
     api_endpoint = "https://api.pinata.cloud/pinning/pinFileToIPFS"
-    api_key = "93407b953284346d89e2"  # Placeholder for your API Key
-    api_secret = "c6153a7e62502c242c7c7415b40bab18fea5dd921457e632a58eab03c194c736"  # Placeholder for your API Secret
+    api_key = "fc43276cd57681197751"  # Placeholder for your API Key
+    api_secret = "1b223b21260b64d56c8071d87fa82d1d8bef75dd0456e60ca05da9406ddb37ad"  # Placeholder for your API Secret
 
     client = WebClient()
     client.Headers.Add("pinata_api_key", api_key)
@@ -59,7 +61,14 @@ def pin_file_to_ipfs(file_path):
         response_string = Encoding.UTF8.GetString(response)
         return json.loads(response_string)
     except WebException as e:
-        return str(e.Response.GetResponseStream().ReadToEnd())
+        if e.Response is not None:
+            response_stream = e.Response.GetResponseStream()
+            reader = StreamReader(response_stream)
+            response_text = reader.ReadToEnd()
+            return response_text
+        else:
+            return str(e)
+
 
 
 # Function to ask user if they want to retain local file
