@@ -32,9 +32,6 @@ def parse_xml_and_print(data):
 
         # Loop over all material processes
         for material in root.findall('ns0:process', namespaces):
-            # Debug print the entire material element
-            ET.dump(material)
-
             uuid_elem = material.find('ns3:uuid', namespaces)
             uuid = uuid_elem.text if uuid_elem is not None else "UUID not found"
 
@@ -45,7 +42,6 @@ def parse_xml_and_print(data):
             class_name = class_elem.text if class_elem is not None else "Class name not found"
 
             print("UUID: {0}, Name: {1}, Class Name at level 0: {2}".format(uuid, name, class_name))
-
 
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
