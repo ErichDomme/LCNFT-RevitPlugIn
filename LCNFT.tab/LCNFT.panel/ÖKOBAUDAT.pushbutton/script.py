@@ -6,7 +6,7 @@ clr.AddReference('System.Drawing')
 clr.AddReference('System.Net')
 from System.Text import Encoding
 from System.Net import WebClient
-from System.Windows.Forms import Application, Form, CheckedListBox, Button, DockStyle
+from System.Windows.Forms import Application, Form, TreeView, TreeNode, Button, DockStyle
 
 def preprocess_xml_data(data):
     data = data.replace(u"\u2122", "")  # Removing "trademark" symbol
@@ -54,52 +54,41 @@ class MaterialSelectionForm(Form):
     def __init__(self, materialsByClass):
         self.Text = "Select Materials"
         self.Width = 800
-        self.Height = 400
+        self.Height = 600
 
-        self.checkedListBox = CheckedListBox()
-        self.checkedListBox.Dock = DockStyle.Fill
-        self.checkedListBox.CheckOnClick = True
+        self.treeView = TreeView()
+        self.treeView.Dock = DockStyle.Fill
+        self.treeView.CheckBoxes = True
+        self.treeView.AfterCheck += self.treeView_AfterCheck
 
-        self.populate_materials(materialsByClass)
-
-        # Add select all button
-        self.selectAllButton = Button()
-        self.selectAllButton.Text = 'Select All'
-        self.selectAllButton.Dock = DockStyle.Top
-        self.selectAllButton.Click += self.select_all_clicked
-
-        # Add deselect all button
-        self.deselectAllButton = Button()
-        self.deselectAllButton.Text = 'Deselect All'
-        self.deselectAllButton.Dock = DockStyle.Top
-        self.deselectAllButton.Click += self.deselect_all_clicked
+        self.populate_tree(materialsByClass)
 
         self.okButton = Button()
         self.okButton.Text = 'OK'
         self.okButton.Dock = DockStyle.Bottom
         self.okButton.Click += self.button_clicked
 
-        self.Controls.Add(self.checkedListBox)
-        self.Controls.Add(self.selectAllButton)
-        self.Controls.Add(self.deselectAllButton)
+        self.Controls.Add(self.treeView)
         self.Controls.Add(self.okButton)
 
-    def populate_materials(self, materialsByClass):
+    def populate_tree(self, materialsByClass):
         for className, materials in materialsByClass.items():
+            parent_node = TreeNode(className)
+            self.treeView.Nodes.Add(parent_node)
             for material in materials:
-                item = "{0} - {1} ({2})".format(className, material['name'], material['uuid'])
-                self.checkedListBox.Items.Add(item)
+                child_node = TreeNode("{0} ({1})".format(material['name'], material['uuid']))
+                parent_node.Nodes.Add(child_node)
 
-    def select_all_clicked(self, sender, args):
-        for i in range(self.checkedListBox.Items.Count):
-            self.checkedListBox.SetItemChecked(i, True)
-
-    def deselect_all_clicked(self, sender, args):
-        for i in range(self.checkedListBox.Items.Count):
-            self.checkedListBox.SetItemChecked(i, False)
+    def treeView_AfterCheck(self, sender, e):
+        for node in e.Node.Nodes:
+            node.Checked = e.Node.Checked  # Check/uncheck all child nodes.
 
     def button_clicked(self, sender, args):
-        selected_materials = [self.checkedListBox.Items[i] for i in range(self.checkedListBox.Items.Count) if self.checkedListBox.GetItemChecked(i)]
+        selected_materials = []
+        for class_node in self.treeView.Nodes:
+            for material_node in class_node.Nodes:
+                if material_node.Checked:
+                    selected_materials.append(material_node.Text)
         print(selected_materials)  # For testing purposes
         self.Close()
 
