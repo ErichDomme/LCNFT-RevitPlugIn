@@ -6,8 +6,8 @@ from System.Text import Encoding
 from System.Net import WebClient
 
 def preprocess_xml_data(data):
-    # Replace  with a suitable replacement or remove it
-    return data.replace(u"\u2122", "")  # Removing  symbol
+    # Replace ™ with a suitable replacement or remove it
+    return data.replace(u"\u2122", "")  # Removing ™ symbol
 
 def get_api_data(url):
     client = WebClient()
@@ -26,8 +26,7 @@ def parse_xml_and_print(data):
         root = ET.fromstring(data)
         namespaces = {
             'ns0': 'http://www.ilcd-network.org/ILCD/ServiceAPI/Process',
-            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI',
-            'xml': 'http://www.w3.org/XML/1998/namespace'
+            'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI'
         }
 
         # Loop over all material processes
@@ -35,9 +34,12 @@ def parse_xml_and_print(data):
             uuid_elem = material.find('ns3:uuid', namespaces)
             uuid = uuid_elem.text if uuid_elem is not None else "UUID not found"
 
-            # Adjusted XPath query to find the German name
-            name_elem = material.find("ns3:name[@{http://www.w3.org/XML/1998/namespace}lang='de']", namespaces)
-            name = name_elem.text if name_elem is not None else "Name not found"
+            # Loop to find the German name
+            name = "Name not found"
+            for name_elem in material.findall('ns3:name', namespaces):
+                if name_elem.get('{http://www.w3.org/XML/1998/namespace}lang') == 'de':
+                    name = name_elem.text
+                    break
 
             class_elem = material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
             class_name = class_elem.text if class_elem is not None else "Class name not found"
