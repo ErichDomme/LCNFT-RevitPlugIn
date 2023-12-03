@@ -103,20 +103,28 @@ class MaterialSelectionForm(Form):
         self.Close()
 
     def create_materials_in_revit(self, materials):
-        doc = DocumentManager.Instance.CurrentDBDocument
-        TransactionManager.Instance.EnsureInTransaction(doc)
-        
+        # Obtain the current Revit document
+        uidoc = __revit__.ActiveUIDocument
+        doc = uidoc.Document
+
+        # Start a transaction to create materials in Revit
+        t = Transaction(doc, "Create Materials")
+        t.Start()
+
         for mat_info in materials:
             try:
                 # Create a new material
-                mat = Material.Create(doc, mat_info["name"])
+                mat_id = Material.Create(doc, mat_info["name"])
+                # Obtain the material element using the created Material's id
+                mat = doc.GetElement(mat_id)
                 # Set the material's comments to the UUID
-                mat_elem = doc.GetElement(mat)
-                mat_elem.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS).Set(mat_info["uuid"])
+                mat.Comment = mat_info["uuid"]
             except Exception as e:
                 print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
 
-        TransactionManager.Instance.TransactionTaskDone()
+        # Commit the transaction after creating all materials
+        t.Commit()
+
 
 def main():
     url = 'https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes'
