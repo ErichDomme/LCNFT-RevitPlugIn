@@ -10,20 +10,18 @@ try:
     # Download the data as a string
     data = client.DownloadString('https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes')
     
+    # Save raw XML content to a file for inspection (if necessary)
+    with open('raw_xml_output.xml', 'w') as file:
+        file.write(data)
+    
     # Parse the XML response
     root = ET.fromstring(data)
 
-    # Now you can iterate over the elements and extract data
+    # Iterate over the elements and extract data
     for process in root.findall('{http://www.ilcd-network.org/ILCD/ServiceAPI}process'):
-        # Extract UUID, name, classification, etc.
-        uuid = process.find('{http://www.ilcd-network.org/ILCD/ServiceAPI}uuid').text
-        names = process.findall('{http://www.ilcd-network.org/ILCD/ServiceAPI}name')
-        for name in names:
-            lang = name.attrib['{http://www.w3.org/XML/1998/namespace}lang']
-            value = name.text
-            print("Name ({0}): {1}".format(lang, value))
-        
-        # Add additional parsing as needed for your application
+        # Extract details here
 
+except ET.ParseError as pe:
+    print("Failed to parse XML: {0}".format(pe))
 except Exception as e:
     print("Failed to fetch materials: {0}".format(str(e)))
