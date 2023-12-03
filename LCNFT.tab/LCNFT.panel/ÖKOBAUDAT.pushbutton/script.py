@@ -27,25 +27,21 @@ def parse_xml_and_print(data):
         namespaces = {
             'ns0': 'http://www.ilcd-network.org/ILCD/ServiceAPI/Process',
             'ns3': 'http://www.ilcd-network.org/ILCD/ServiceAPI',
-            'xml': 'http://www.w3.org/XML/1998/namespace'  # Adding the 'xml' namespace
+            'xml': 'http://www.w3.org/XML/1998/namespace'
         }
 
-        # Find the first material process
-        first_material = root.find('ns0:process', namespaces)
-
-        if first_material is not None:
-            uuid_elem = first_material.find('ns3:uuid', namespaces)
+        # Loop over all material processes
+        for material in root.findall('ns0:process', namespaces):
+            uuid_elem = material.find('ns3:uuid', namespaces)
             uuid = uuid_elem.text if uuid_elem is not None else "UUID not found"
 
-            name_elem = first_material.find('ns3:name[@xml:lang="en"]', namespaces)
+            name_elem = material.find('ns3:name[@xml:lang="en"]', namespaces)
             name = name_elem.text if name_elem is not None else "Name not found"
 
-            class_elem = first_material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
+            class_elem = material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
             class_id = class_elem.get('classId') if class_elem is not None else "Class ID not found"
 
             print("UUID: {0}, Name: {1}, Class ID at level 0: {2}".format(uuid, name, class_id))
-        else:
-            print("No material found")
 
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
