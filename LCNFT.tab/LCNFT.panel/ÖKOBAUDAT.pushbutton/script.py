@@ -6,6 +6,7 @@ clr.AddReference('System.Drawing')
 clr.AddReference('System.Net')
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitServices')
+from Autodesk.Revit.DB import *
 from System.Text import Encoding
 from System.Net import WebClient
 from System.Windows.Forms import Application, Form, TreeView, TreeNode, Button, DockStyle
@@ -102,28 +103,33 @@ class MaterialSelectionForm(Form):
         self.create_materials_in_revit(selected_materials)
         self.Close()
 
-    def create_materials_in_revit(self, materials):
-        # Obtain the current Revit document
-        uidoc = __revit__.ActiveUIDocument
-        doc = uidoc.Document
+        def create_materials_in_revit(self, materials):
+            # Obtain the current Revit document
+            uidoc = __revit__.ActiveUIDocument
+            doc = uidoc.Document
 
-        # Start a transaction to create materials in Revit
-        t = Transaction(doc, "Create Materials")
-        t.Start()
+            # Start a transaction to create materials in Revit
+            t = Transaction(doc, "Create Materials")
+            t.Start()
 
-        for mat_info in materials:
-            try:
-                # Create a new material
-                mat_id = Material.Create(doc, mat_info["name"])
-                # Obtain the material element using the created Material's id
-                mat = doc.GetElement(mat_id)
-                # Set the material's comments to the UUID
-                mat.Comment = mat_info["uuid"]
-            except Exception as e:
-                print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
+            for mat_info in materials:
+                try:
+                    # Create a new material
+                    mat_id = Material.Create(doc, mat_info["name"])
+                    # Obtain the material element using the created Material's id
+                    mat = doc.GetElement(mat_id)
 
-        # Commit the transaction after creating all materials
-        t.Commit()
+                    # Find the comments parameter and set its value to the UUID
+                    comments_param = mat.LookupParameter("Comments")
+                    if comments_param is not None and not comments_param.IsReadOnly:
+                        comments_param.Set(mat_info["uuid"])
+                    else:
+                        print("Could not set comments for material: {}".format(mat_info["name"]))
+                except Exception as e:
+                    print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
+
+            # Commit the transaction after creating all materials
+            t.Commit()
 
 
 def main():
