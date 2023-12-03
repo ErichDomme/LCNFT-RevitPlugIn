@@ -6,8 +6,10 @@ from System.Text import Encoding
 from System.Net import WebClient
 
 def preprocess_xml_data(data):
-    # Replace  with a suitable replacement or remove it
-    return data.replace(u"\u2122", "")  # Removing  symbol
+    # Replace "trademark" and "registered" with suitable replacements or remove them
+    data = data.replace(u"\u2122", "")  # Removing "trademark" symbol
+    data = data.replace(u"\u00AE", "")  # Removing "registered" symbol
+    return data
 
 def get_api_data(url):
     client = WebClient()
