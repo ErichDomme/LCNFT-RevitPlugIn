@@ -34,17 +34,15 @@ def parse_xml_and_print(data):
             uuid_elem = material.find('ns3:uuid', namespaces)
             uuid = uuid_elem.text if uuid_elem is not None else "UUID not found"
 
-            # Loop to find the German name
-            name = "Name not found"
+            # Debugging: Print all names for the material
+            print("UUID: {}".format(uuid))
             for name_elem in material.findall('ns3:name', namespaces):
-                if name_elem.get('{http://www.w3.org/XML/1998/namespace}lang') == 'de':
-                    name = name_elem.text
-                    break
+                lang = name_elem.get('{http://www.w3.org/XML/1998/namespace}lang')
+                print("  Name ({}): {}".format(lang, name_elem.text))
 
             class_elem = material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
             class_name = class_elem.text if class_elem is not None else "Class name not found"
-
-            print("UUID: {0}, Name: {1}, Class Name at level 0: {2}".format(uuid, name, class_name))
+            print("  Class Name at level 0: {}".format(class_name))
 
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
