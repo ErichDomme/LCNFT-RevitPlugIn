@@ -62,12 +62,26 @@ class MaterialSelectionForm(Form):
 
         self.populate_materials(materialsByClass)
 
+        # Add select all button
+        self.selectAllButton = Button()
+        self.selectAllButton.Text = 'Select All'
+        self.selectAllButton.Dock = DockStyle.Top
+        self.selectAllButton.Click += self.select_all_clicked
+
+        # Add deselect all button
+        self.deselectAllButton = Button()
+        self.deselectAllButton.Text = 'Deselect All'
+        self.deselectAllButton.Dock = DockStyle.Top
+        self.deselectAllButton.Click += self.deselect_all_clicked
+
         self.okButton = Button()
         self.okButton.Text = 'OK'
         self.okButton.Dock = DockStyle.Bottom
         self.okButton.Click += self.button_clicked
 
         self.Controls.Add(self.checkedListBox)
+        self.Controls.Add(self.selectAllButton)
+        self.Controls.Add(self.deselectAllButton)
         self.Controls.Add(self.okButton)
 
     def populate_materials(self, materialsByClass):
@@ -75,6 +89,14 @@ class MaterialSelectionForm(Form):
             for material in materials:
                 item = "{0} - {1} ({2})".format(className, material['name'], material['uuid'])
                 self.checkedListBox.Items.Add(item)
+
+    def select_all_clicked(self, sender, args):
+        for i in range(self.checkedListBox.Items.Count):
+            self.checkedListBox.SetItemChecked(i, True)
+
+    def deselect_all_clicked(self, sender, args):
+        for i in range(self.checkedListBox.Items.Count):
+            self.checkedListBox.SetItemChecked(i, False)
 
     def button_clicked(self, sender, args):
         selected_materials = [self.checkedListBox.Items[i] for i in range(self.checkedListBox.Items.Count) if self.checkedListBox.GetItemChecked(i)]
