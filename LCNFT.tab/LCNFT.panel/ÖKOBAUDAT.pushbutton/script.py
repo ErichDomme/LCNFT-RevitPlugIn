@@ -98,6 +98,7 @@ def main():
     if xml_data:
         materialsByClass = parse_materials(xml_data)
         form = MaterialSelectionForm(materialsByClass)
-        Application.Run(form)
+        form.ShowDialog()  # Use ShowDialog() instead of Application.Run(form)
 
 main()
+
