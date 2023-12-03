@@ -124,8 +124,8 @@ class MaterialSelectionForm(Form):
         for mat_info in materials:
             try:
                 # Create a new material
-                new_mat = Material.Create(doc, mat_info["name"])
-                new_mat = doc.GetElement(new_mat.Id)
+                mat_id = Material.Create(doc, mat_info["name"])
+                new_mat = doc.GetElement(mat_id)  # mat_id is already an ElementId, no need for .Id
 
                 # Set the material's comments to the UUID
                 comment_param = new_mat.LookupParameter("Comments")
@@ -133,6 +133,7 @@ class MaterialSelectionForm(Form):
                     comment_param.Set(mat_info["uuid"])
             except Exception as e:
                 print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
+
 
         t.Commit()
 
