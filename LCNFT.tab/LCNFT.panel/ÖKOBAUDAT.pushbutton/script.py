@@ -34,10 +34,14 @@ def parse_xml_and_print(data):
         first_material = root.find('ns0:process', namespaces)
 
         if first_material is not None:
-            uuid = first_material.find('ns3:uuid', namespaces).text
-            # Adjusted XPath query to include the 'xml' namespace for language
-            name = first_material.find('ns3:name[@xml:lang="en"]', namespaces).text
-            class_id = first_material.find('ns3:classification/ns3:class[@level="0"]', namespaces).get('classId')
+            uuid_elem = first_material.find('ns3:uuid', namespaces)
+            uuid = uuid_elem.text if uuid_elem is not None else "UUID not found"
+
+            name_elem = first_material.find('ns3:name[@xml:lang="en"]', namespaces)
+            name = name_elem.text if name_elem is not None else "Name not found"
+
+            class_elem = first_material.find('ns3:classification/ns3:class[@level="0"]', namespaces)
+            class_id = class_elem.get('classId') if class_elem is not None else "Class ID not found"
 
             print("UUID: {0}, Name: {1}, Class ID at level 0: {2}".format(uuid, name, class_id))
         else:
