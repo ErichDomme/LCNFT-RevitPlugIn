@@ -1,24 +1,32 @@
 import clr
 import xml.etree.ElementTree as ET
+
+# Add references to Revit API
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitServices')
+
+# Import DocumentManager and TransactionManager to handle transactions
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+# Import Revit API classes
+from Autodesk.Revit.DB import Material, Transaction, BuiltInParameter
+
+# Add references for creating the form
 clr.AddReference('System')
 clr.AddReference('System.Windows.Forms')
 clr.AddReference('System.Drawing')
 clr.AddReference('System.Net')
-clr.AddReference('RevitAPI')
-clr.AddReference('RevitServices')
-from Autodesk.Revit.DB import *
 from System.Text import Encoding
 from System.Net import WebClient
 from System.Windows.Forms import Application, Form, TreeView, TreeNode, Button, DockStyle
-from Autodesk.Revit.DB import Material, Transaction
-from RevitServices.Persistence import DocumentManager
-from RevitServices.Transactions import TransactionManager
 
+# Method to preprocess XML data
 def preprocess_xml_data(data):
     data = data.replace(u"\u2122", "")  # Removing "trademark" symbol
     data = data.replace(u"\u00AE", "")  # Removing "registered" symbol
     return data
 
+# Method to get API data
 def get_api_data(url):
     client = WebClient()
     client.Encoding = Encoding.UTF8
@@ -29,6 +37,7 @@ def get_api_data(url):
         print("Error fetching data: {0}".format(str(e)))
         return None
 
+# Method to parse materials
 def parse_materials(data):
     materialsByClass = {}
     try:
@@ -56,6 +65,7 @@ def parse_materials(data):
 
     return materialsByClass
 
+# Form for material selection
 class MaterialSelectionForm(Form):
     def __init__(self, materialsByClass):
         self.Text = "Select Materials"
@@ -103,42 +113,34 @@ class MaterialSelectionForm(Form):
         self.create_materials_in_revit(selected_materials)
         self.Close()
 
-        def create_materials_in_revit(self, materials):
-            # Obtain the current Revit document
-            uidoc = __revit__.ActiveUIDocument
-            doc = uidoc.Document
+    def create_materials_in_revit(self, materials):
+        doc = DocumentManager.Instance.CurrentDBDocument
 
-            # Start a transaction to create materials in Revit
-            t = Transaction(doc, "Create Materials")
-            t.Start()
+        # Start a transaction to create materials in Revit
+        TransactionManager.Instance.EnsureInTransaction(doc)
 
-            for mat_info in materials:
-                try:
-                    # Create a new material
-                    mat_id = Material.Create(doc, mat_info["name"])
-                    # Obtain the material element using the created Material's id
-                    mat = doc.GetElement(mat_id)
+        for mat_info in materials:
+            try:
+                # Create a new material
+                new_mat_id = Material.Create(doc, mat_info["name"])
+                new_mat = doc.GetElement(new_mat_id)
 
-                    # Find the comments parameter and set its value to the UUID
-                    comments_param = mat.LookupParameter("Comments")
-                    if comments_param is not None and not comments_param.IsReadOnly:
-                        comments_param.Set(mat_info["uuid"])
-                    else:
-                        print("Could not set comments for material: {}".format(mat_info["name"]))
-                except Exception as e:
-                    print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
+                # Set the material's comments to the UUID
+                comment_param = new_mat.LookupParameter("Comments")
+                if comment_param is not None and not comment_param.IsReadOnly:
+                    comment_param.Set(mat_info["uuid"])
+            except Exception as e:
+                print("Failed to create material {}: {}".format(mat_info["name"], str(e)))
 
-            # Commit the transaction after creating all materials
-            t.Commit()
+        TransactionManager.Instance.TransactionTaskDone()
 
-
+# Main function
 def main():
     url = 'https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes'
     xml_data = get_api_data(url)
     if xml_data:
         materialsByClass = parse_materials(xml_data)
         form = MaterialSelectionForm(materialsByClass)
-        form.ShowDialog()  # Use ShowDialog() instead of Application.Run(form)
+        form.ShowDialog()
 
 main()
-
