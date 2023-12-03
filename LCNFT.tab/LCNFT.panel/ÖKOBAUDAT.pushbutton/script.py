@@ -32,15 +32,16 @@ def parse_xml_and_print(data):
         print("Root element:", root.tag)
 
         # Find the first material process
-        first_material = root.find('sapi:process', namespaces)
+        # Adjusted XPath query
+        first_material = root.find('.//sapi:process', namespaces)
 
         if first_material is not None:
             # More debugging: print first_material tag
             print("First material tag:", first_material.tag)
 
-            uuid = first_material.find('sapi:uuid', namespaces).text
-            name = first_material.find('sapi:name', namespaces).text
-            class_id = first_material.find('sapi:classification/sapi:class[@level="0"]', namespaces).get('classId')
+            uuid = first_material.find('.//sapi:uuid', namespaces).text
+            name = first_material.find('.//sapi:name[@xml:lang="en"]', namespaces).text  # Assuming you want the name in English
+            class_id = first_material.find('.//sapi:class[@level="0"]', namespaces).get('classId')
 
             print("UUID: {0}, Name: {1}, Class ID at level 0: {2}".format(uuid, name, class_id))
         else:
@@ -48,6 +49,7 @@ def parse_xml_and_print(data):
 
     except Exception as e:
         print("Error parsing XML: {0}".format(str(e)))
+
 
 def main():
     url = 'https://oekobaudat.de/OEKOBAU.DAT/resource/datastocks/cd2bda71-760b-4fcc-8a0b-3877c10000a8/processes'
