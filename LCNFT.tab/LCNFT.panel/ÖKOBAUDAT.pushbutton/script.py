@@ -128,7 +128,7 @@ class MaterialSelectionForm(Form):
                 new_mat = doc.GetElement(mat_id)  # mat_id is already an ElementId, no need for .Id
 
                 # Set the material's comments to the UUID
-                comment_param = new_mat.LookupParameter("Comments")
+                comment_param = new_mat.LookupParameter("Kommentare")
                 if comment_param and not comment_param.IsReadOnly:
                     comment_param.Set(mat_info["uuid"])
             except Exception as e:
