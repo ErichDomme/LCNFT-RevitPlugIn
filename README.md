@@ -31,7 +31,7 @@ __Revit Requirements__
 ## Installation
 In order for UMNFT to run on your computer, you will need to do a few installations beforehand. UMNFT is based on pyRevit and this is where we start.
 1. Make sure you have Autodesk Revit installed on your computer!
-2. Install the latest [pyRevit version](https://github.com/eirannejad/pyRevit/releases), during the development of Cross-Tools the version [v4.8.13.23182](https://github.com/eirannejad/pyRevit/releases/tag/v4.8.13.23182%2B2215) was used. The installation is self-explanatory and very well documented, but a look at the [Notion Page](https://pyrevitlabs.notion.site/pyrevitlabs/pyRevit-bd907d6292ed4ce997c46e84b6ef67a0) is worthwhile.
+2. Install the latest [pyRevit version](https://github.com/eirannejad/pyRevit/releases), during the development of UMNFT the version [v4.8.13.23182](https://github.com/eirannejad/pyRevit/releases/tag/v4.8.13.23182%2B2215) was used. The installation is self-explanatory and very well documented, but a look at the [Notion Page](https://pyrevitlabs.notion.site/pyrevitlabs/pyRevit-bd907d6292ed4ce997c46e84b6ef67a0) is worthwhile.
 3. After the successful installation of pyRevit, Navigate now to the extensions of pyRevit, under the first tab. 
 <div align="center">
 <img src="./img/Pyrevit_Extensions.png" >
@@ -114,7 +114,7 @@ To do:
 - 
 
 ## Acknowledgements
-Without these people and their projects, Cross-Tools would not have been possible:
+Without these people and their projects, UMNFT would not have been possible:
 - [Ehsan Iran-Nejad](https://github.com/eirannejad) with [pyRevit](https://github.com/eirannejad/pyRevit)
 - [Erik Frits](https://github.com/ErikFrits) with [EF-Tools](https://github.com/ErikFrits/EF-Tools)
 - [Gavin Crump, aussieBIMguru](https://github.com/aussieBIMguru) with [guRoo](https://github.com/aussieBIMguru/guRoo/tree/main/guRoo.tab/Tools.panel)
