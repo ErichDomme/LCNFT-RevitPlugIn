@@ -106,13 +106,6 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 <span style="color:green">**Version 0.0.1 published!**</span>
 <!-- _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.-->
 
-## Room for Improvement
-Room for improvement:
-- 
-
-To do:
-- 
-
 ## Acknowledgements
 Without these people and their projects, UMNFT would not have been possible:
 - [Ehsan Iran-Nejad](https://github.com/eirannejad) with [pyRevit](https://github.com/eirannejad/pyRevit)
