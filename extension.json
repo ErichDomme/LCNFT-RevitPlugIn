@@ -3,11 +3,11 @@
     "default_enabled": "True",
     "type": "extension",
     "rocket_mode_compatible": "False",
-    "name": "LCNFT",
+    "name": "UMNFT",
     "description": "Master Thesis Architecture - Erich Domme - WiSe 2023/24",
     "author": "Erich Domme",
     "author_profile": "https://github.com/ErichDomme",
-    "url": "https://github.com/ErichDomme/LCNFT-RevitPlugIn",
+    "url": "https://github.com/ErichDomme/UMNFT-RevitPlugIn",
     "website": "https://github.com/ErichDomme",
     "image": "",
     "dependencies": []
