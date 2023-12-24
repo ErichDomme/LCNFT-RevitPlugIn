@@ -108,118 +108,16 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 <p align="center"><font size="3">
 Congratulations!</p>
 
-
-## Cross Tools - Features
-
-<div align="center">
-<img src="./img/Toolbar.png" >
-<p>The "cross" Extension visible in the Revit toolbar</p>
-</div>
-
-<details>
-<summary>Dimension</summary>
-Dimension Line based Elements [Python]<br>
-</details>
-
-<details>
-<summary>Generate</summary>
-Beam(s) through input Surface [Dynamo]<br>
-</details>
-
-<details>
-<summary>Parameter</summary>
-Disallow Join [Python]<br>
-Wall constraints: Base [Python]<br>
-Wall constraints: Base & Top [Python]<br>
-Wall constraints: Top [Python]<br>
-</details>
-
-<details>
-<summary>Room Book</summary>
-01 Generate Parameter [Dynamo]<br>
-02 Assign Doors and Windows to their Rooms [Dynamo]<br>
-03 Assign Finished and Raw Room Height [Dynamo]<br>
-04 Assign Elevation Height [Dynamo]<br>
-</details>
-
-<details>
-<summary>Selection</summary>
-Same category as selected [Python]<br>
-Same type as selected [Python]<br>
-Titleblocks on sheets [Python]<br>
-Select only of categories [Python]<br>
-Select only 3D [Python]<br>
-Select only 2D [Python]<br>
-Deselect grouped elements [Python]<br>
-Isolate Panels [Dynamo]<br>
-</details>
-
-<details>
-<summary>Sheets</summary>
-Place View(s) on Sheet [Dynamo]<br>
-</details>
-
-<details>
-<summary>Tag</summary>
-Center Room Tags [Python]<br>
-</details>
-
-<details>
-<summary>Warning</summary>
-Warning Management [Dynamo]<br>
-Reset Graphical Override [Dynamo]<br>
-</details>
-
-<details>
-<summary>Purge</summary>
-Purge Delete Backups [Python]<br>
-Purge DWG Line Patterns [Python]<br>
-Purge imported dwg [Python]<br>
-Purge unused scope boxes [Python]<br>
-Purge unplaced views [Python]<br>
-Purge unused sheets [Python]<br>
-Remove unplaced rooms [Python]<br>
-Remove unplaced areas [Python]<br>
-Remove unenclosed areas [Python]<br>
-Delete Family [Python]<br>
-Delete selected unplaced Views [Dynamo]<br>
-Delete unused View Template [Dynamo]<br>
-Delete unused Filters [Dynamo]<br>
-Ungroup all [Python]<br>
-</details>
-
-<details>
-<summary>Excel</summary>
-Excel [Dynamo]<br>
-</details>
-
-<details>
-<summary>Testing</summary>
-Testing Dynamo [Dynamo]<br>
-Testing Python [Python]<br>
-</details> 
-
-
-## Screenshots
-
-
-## Usage
-
-
-
 ## Project Status
 <span style="color:green">**Version 0.0.1 published!**</span>
 <!-- _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.-->
 
-
 ## Room for Improvement
 Room for improvement:
-- Improvement to be done
-- More Room Book Tools for stepwise creation
+- 
 
 To do:
-- Dimension Tool is still work in progress
-
+- 
 
 ## Acknowledgements
 Without these people and their projects, Cross-Tools would not have been possible:
@@ -232,10 +130,3 @@ Without these people and their projects, Cross-Tools would not have been possibl
 
 ## Contact
 Created by [Erich Domme](mailto:erich.domme@rwth-aachen.de) - feel free to contact me!
-
-
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
-
-<!-- You don't have to include all sections - just the one's relevant to your project -->
