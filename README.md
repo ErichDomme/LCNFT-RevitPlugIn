@@ -1,64 +1,24 @@
 <h1 align="center">
-  <a name="logo"><img src="img\icon_nft.svg" alt="UMNFT" width="350"></a>
+  <a name="logo"><img src="img\icon_nft.svg" alt="UMNFT" width="300"></a>
   <br>
   Urban Mining NFT <br>
-  UMNFT by Erich Domme
+  - UMNFT - <br>
+  Revit PlugIn
 </h1>
 
 <div align="center"></div>
 
 <p><font size="3">
-The purpose of this repository is to document all "Cross-Tools", how they work, the idea behind them and how they were implemented! The project was developed during an internship at Cross Architecture Aachen as part of the Master in Construction and Robotics at RWTH Aachen University. The aim was to implement a set of tools that the entire Cross Architecture team could use to simplify and in many cases automate repetitive, tedious and complicated tasks in their daily work with Revit. These quality of life tools were constantly tested and adapted to the working conditions. </p>
-
-<!-- LINKS -->
-
-<div align="center"><a name="menu"></a>
-  <h4>
-    <a href="https://www.pinterest.de/cross_architecture/">
-      Pinterest
-    </a>
-    <span> | </span>
-    <a href="https://www.facebook.com/CROSSArchitecture/">
-      Facebook
-    </a>
-    <span> | </span>
-    <a href="https://www.linkedin.com/company/cross-architecture/mycompany/">
-      LinkedIn
-    </a>
-    <span> | </span>
-    <a href="https://www.instagram.com/cross_architecture/">
-      Instagram
-    </a>
-    <span> | </span>
-    <a href="https://www.cross-architecture.net/">
-      Homepage
-    </a>
-  </h4>
-</div>
-
-## Table of Contents
-* [General Info](#general-information)
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
-<!-- * [License](#license) -->
+This project was developed during my Master Thesis at RWTH Aachen University. This Extension is one . </p>
 
 ## General Information
-Cross-Tools is a collection of tools based on Dynamo and/or Python. The aim of these tools is to make your daily work with Revit easier. During the course of a building project, our architects are faced with a number of tasks that need to be completed. These tasks can often be repetitive and time consuming. That's why Cross Tools are designed to help with automation and management tasks. This includes facilitating the creation of plan sheets as well as alert management in the model. Under [Features](#features) all tools are listed and described in their use case.
+.
 
 
 ## Requirements
 > It is assumed that you have Autodesk Revit installed on your computer!<br>
-> Revit 2021 has been used for development!<br>
+> Revit 2023 has been used for development!<br>
 > Except for pyRevit, the other requirements are not mandatory! But they might be, as I will be looking at the extensions in the future!<br>
-> The requirements for Dynamo should only be of interest to you if you want to open and edit the scripts in Dynamo.
 
 __Revit Requirements__
 1. [__pyRevit__](https://github.com/eirannejad/pyRevit/releases/tag/v4.8.12.22247%2B0031)
@@ -68,47 +28,17 @@ __Revit Requirements__
 5. [Revitron-UI](https://github.com/revitron/revitron-ui)
 6. [Speckle](https://speckle.systems/)
 
-<details>
-<summary>Dynamo Requirements</summary>
-1. archi-lab.net [2023.213.1722]<br>
-2. Clockwork for Dynamo 2.x [2.6.0]<br>
-3. Crumple [2022.5.27]<br>
-4. DynamoMEP [1.0.3]<br>
-5. JBE sheet views [0.0.1]<br>
-6. Journalysis for Dynamo 2.x [2.4.0]<br>
-7. Luchbox for Dynamo [2018.8.8]<br>
-8. Orchid [206.6.0.5911]<br>
-9. ParametricMonkey [1.3.6]<br>
-10. Quasrll [2021.25.101]<br>
-11. Rhythm [2020.9.8]<br>
-12. spring nodes [210.1.1]<br>
-13. SteamNodes [1.2.4]<br>
-14. Topologic [1.4.0]<br>
-15. TuneUp [1.0.7]<br>
-16. Turn Into List [0.1.5]<br>
-17. Bang! [2021.4.3]<br>
-18. bimorphNodes [4.2.4]<br>
-19. Data-Shapes [2022.2.105]<br>
-20. Genius Loci [2023.2.21]<br>
-21. MEPover [2022.10.30]<br>
-22. Monocle [2023.5.1]<br>
-23. SpeckleDynamo2 [2.0.0]<br>
-24. GenerativeDesign [1.2.1]<br>
-25. GenerativeDesign.Extension [1.3.2.0]<br>
-26. GenerativeDesign.Revit [1.2.1]
-</details>
-
 ## Installation
-In order for Cross-Tools to run on your computer, you will need to do a few installations beforehand. Cross-Tools is based on pyRevit and this is where we start.
+In order for UMNFT to run on your computer, you will need to do a few installations beforehand. UMNFT is based on pyRevit and this is where we start.
 1. Make sure you have Autodesk Revit installed on your computer!
-2. Install the latest [pyRevit version](https://github.com/eirannejad/pyRevit/releases), during the development of Cross-Tools the version [v4.8.12.22247](https://github.com/eirannejad/pyRevit/releases/tag/v4.8.12.22247%2B0031) was used. The installation is self-explanatory and very well documented, but a look at the [Notion Page](https://pyrevitlabs.notion.site/pyrevitlabs/pyRevit-bd907d6292ed4ce997c46e84b6ef67a0) is worthwhile.
+2. Install the latest [pyRevit version](https://github.com/eirannejad/pyRevit/releases), during the development of Cross-Tools the version [v4.8.13.23182](https://github.com/eirannejad/pyRevit/releases/tag/v4.8.13.23182%2B2215) was used. The installation is self-explanatory and very well documented, but a look at the [Notion Page](https://pyrevitlabs.notion.site/pyrevitlabs/pyRevit-bd907d6292ed4ce997c46e84b6ef67a0) is worthwhile.
 3. After the successful installation of pyRevit, Navigate now to the extensions of pyRevit, under the first tab. 
 <div align="center">
 <img src="./img/Pyrevit_Extensions.png" >
 </div>
 
-4. You should now see a list of all extensions that are either written by pyRevit itself or recommended by pyRevit, this is the __pyRevit Extension Manager__. We now want to add "cross" to this list!
-> __"cross" should not be visible to you yet, as shown in the screenshot below!__<br>
+4. You should now see a list of all extensions that are either written by pyRevit itself or recommended by pyRevit, this is the __pyRevit Extension Manager__. We now want to add "UMNFT" to this list!
+> __"UMNFT" should not be visible to you yet, as shown in the screenshot below!__<br>
 
 <div align="center">
 <img src="./img/Pyrevit_Extension_Manager_Step01.png" >
