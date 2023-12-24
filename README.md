@@ -56,12 +56,12 @@ In order for UMNFT to run on your computer, you will need to do a few installati
             "default_enabled": "True",
             "type": "extension",
             "rocket_mode_compatible": "False",
-            "name": "cross",
-            "description": "Extensions for Cross Architecture",
+            "name": "UMNFT",
+            "description": "Master Thesis Architecture - Erich Domme - WiSe 2023/24",
             "author": "Erich Domme",
-            "author_profile": "https://github.com/CrossArchitecture",
-            "url": "https://github.com/CrossArchitecture/cross.git",
-            "website": "https://github.com/CrossArchitecture",
+            "author_profile": "https://github.com/ErichDomme",
+            "url": "https://github.com/ErichDomme/UMNFT-RevitPlugIn",
+            "website": "https://github.com/ErichDomme",
             "image": "",
             "dependencies": []
         }
@@ -74,7 +74,7 @@ In order for UMNFT to run on your computer, you will need to do a few installati
             n. Extension
         },
         {
-            cross
+            UMNFT
         }
     ]
 }
@@ -82,31 +82,25 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 
 7. Depending on your system it may be enough to reload pyRevit __and__ update it once. However, my recommendation would be a __restart__ of Revit. Any changes will be added automatically. 
 
-8. Navigate to the __pyRevit Extension Manager__ again. You should now be able to see "cross"!
+8. Navigate to the __pyRevit Extension Manager__ again. You should now be able to see "UMNFT"!
 
 <div align="center">
 <img src="./img/Pyrevit_Extension_Manager_Step02.png" >
 </div>
 
-9. "Cross-Tools" is currently not a private repository. But that can change, therefore the check box "Git repository is private" has not to be checked! If you want to get the access token, after it is private, contact [me](mailto:erich.domme@rwth-aachen.de)!
+9. "UMNFT" is currently not a private repository. But that can change, therefore the check box "Git repository is private" has not to be checked! If you want to get the access token, after it is private, contact [me](mailto:erich.domme@rwth-aachen.de)!
 
 <div align="center">
 <img src="./img/Pyrevit_Extension_Manager_Step03.png" >
 </div>
 
-10. In contrast to me, "cross" will not yet be installed in your Revit. You should do this by clicking on Install Extension.
+10. In contrast to me, "UMNFT" will not yet be installed in your Revit. You should do this by clicking on Install Extension.
 
 <div align="center">
 <img src="./img/Pyrevit_Extension_Manager_Step04.png" >
 </div>
 
-11. Done! You should now have "cross" in Revit!
-
-<p align="center">
-  <img src=https://media3.giphy.com/media/rY93u9tQbybks/giphy.gif?cid=ecf05e47eap1wzrxxzfedemp62jtrogwbslh12q694q9hdef&ep=v1_gifs_related&rid=giphy.gif&ct=g.gif alt="animated" />
-</p>
-<p align="center"><font size="3">
-Congratulations!</p>
+11. Done! You should now have "UMNFT" in Revit!
 
 ## Project Status
 <span style="color:green">**Version 0.0.1 published!**</span>
