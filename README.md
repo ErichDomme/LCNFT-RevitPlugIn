@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a name="logo"><img src="public\icon_blue_nft.svg" alt="UMNFT" width="300"></a>
+  <a name="logo"><img src="img\icon_blue_nft.svg" alt="UMNFT" width="300"></a>
   <br>
   Urban Mining NFT <br>
   - UMNFT - <br>
