@@ -23,7 +23,7 @@ This Plugin is part 1 of 3. </p>
 In the initial phase of this master's thesis, a customized plugin for Autodesk Revit was developed using pyRevit. This resulted in the creation of an innovative tool called UMNFT, an acronym for Urban Mining Non-Fungible Token, which was seamlessly integrated into Revit. At the heart of this tool is a set of Python scripts precisely tailored to the specific needs of this study. The main functionalities of the plugin are realized by three central scripts: "EXPORT IFC", "UPLOAD TO IPFS" and "ALL IN ONE". Each script fulfills a specific role in the process of generating and administering urban mining NFTs. In particular, the "ALL IN ONE" script is the centerpiece, merging the processes of the other two scripts into an efficient workflow. This script accomplishes the complete export of the Revit project as an IFC 4x3 file to the local computer, followed by an automated upload to the InterPlanetary File System using the Pinata API. After successful placement of the file on IPFS, a unique hash code is provided to the user, which serves as a specific reference point for the uploaded file in IPFS and plays an essential role in the UMNFT process. The following subchapters provide an insight into the "ALL IN ONE" Python script and explain its functions.
 
 <div align="center">
-<img src="./img/Pyrevit_Extensions.png" >
+<img src="./img/Toolbar.png" >
 </div>
 
 This integration with Revit enables intuitive and user-friendly interaction with blockchain technologies, greatly simplifying the accessibility and application of urban mining NFTs in the construction industry. The entire plugin is available on GitHub, with installation instructions documented in detail in the accompanying README.
