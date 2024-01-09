@@ -1,19 +1,48 @@
 <h1 align="center">
-  <a name="logo"><img src="img\icon_nft.svg" alt="UMNFT" width="300"></a>
+  <a name="logo"><img src="public\icon_blue_nft.svg" alt="UMNFT" width="300"></a>
   <br>
   Urban Mining NFT <br>
   - UMNFT - <br>
   PART 01 <br>
-  Revit PlugIn
+  Revit-Plugin
 </h1>
 
 <div align="center"></div>
 
-<p><font size="3">
-This project was developed during my Master Thesis at RWTH Aachen University. This Extension is one . </p>
+<p align="center"><font size="3">
+This project was developed during my Master Thesis<br>
+at RWTH Aachen University, winter semester 2023/24, Faculty of Architecture<br>
+First examiner:<br>
+Univ.-Prof. Dr. Jakob Beetz, Design Computation | CAAD<br>
+Second examiner:<br>
+Jun.Prof. Dr.-Ing. Linda Hildebrand, Cycle-Oriented Construction<br>
+This Plugin is part 1 of 3. </p>
 
-## General Information
-.
+## Excerpt from the Master's thesis
+### 3.1 Revit-Plugin 
+In the initial phase of this master's thesis, a customized plugin for Autodesk Revit was developed using pyRevit. This resulted in the creation of an innovative tool called UMNFT, an acronym for Urban Mining Non-Fungible Token, which was seamlessly integrated into Revit. At the heart of this tool is a set of Python scripts precisely tailored to the specific needs of this study. The main functionalities of the plugin are realized by three central scripts: "EXPORT IFC", "UPLOAD TO IPFS" and "ALL IN ONE". Each script fulfills a specific role in the process of generating and administering urban mining NFTs. In particular, the "ALL IN ONE" script is the centerpiece, merging the processes of the other two scripts into an efficient workflow. This script accomplishes the complete export of the Revit project as an IFC 4x3 file to the local computer, followed by an automated upload to the InterPlanetary File System using the Pinata API. After successful placement of the file on IPFS, a unique hash code is provided to the user, which serves as a specific reference point for the uploaded file in IPFS and plays an essential role in the UMNFT process. The following subchapters provide an insight into the "ALL IN ONE" Python script and explain its functions.
+
+<div align="center">
+<img src="./img/Pyrevit_Extensions.png" >
+</div>
+
+This integration with Revit enables intuitive and user-friendly interaction with blockchain technologies, greatly simplifying the accessibility and application of urban mining NFTs in the construction industry. The entire plugin is available on GitHub, with installation instructions documented in detail in the accompanying README.
+
+#### 3.1.1 Imports and .NET references
+- **clr imports and .NET references:**<br>
+The script imports .NET libraries to access Revit APIs and other necessary functions.
+#### 3.1.2 Functions of the script
+- **IFC export (export_to_ifc)**<br>
+Exports a Revit document as an IFC file. The function takes a Revit document (doc), an export folder (export_folder) and a file name (filename) as input and carries out the export.
+- **User input for file names (get_filename_from_user)**<br>
+Allows the user to enter a filename for the IFC file. Ensures that no file name is used twice and requests a new entry if necessary.
+- **Upload the file to IPFS (pin_file_to_ipfs)**<br>
+Uploads the exported IFC file to IPFS. Uses the Pinata API to upload the file. If successful, it returns the response containing the IPFS hash of the file.
+- **Error handling**<br>
+Catches WebException errors and returns the error message.
+- **User query for local file retention (user_wants_local_copy)**<br>
+Asks the user whether the local IFC file should be kept after uploading. Uses a dialog box to obtain the user's decision.
+The script provides a comprehensive solution to integrate Revit and IPFS by allowing users to export IFC files directly from Revit and upload them to IPFS. A user-friendly interface is provided through dialog boxes and user interactions. The script takes care of both the export process and the handling of the upload, including error handling and user decisions regarding local file storage.
 
 
 ## Requirements
