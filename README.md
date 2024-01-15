@@ -71,7 +71,7 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 > __"UMNFT" should not be visible to you yet, as shown in the screenshot below!__<br>
 
 <div align="center">
-<img src="./img/Pyrevit_Extension_Manager_Step01.png" >
+<img src="./img/Pyrevit_Extension_Manager_01.png" >
 </div>
 
 
@@ -115,19 +115,19 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 8. Navigate to the __pyRevit Extension Manager__ again. You should now be able to see "UMNFT"!
 
 <div align="center">
-<img src="./img/Pyrevit_Extension_Manager_Step02.png" >
+<img src="./img/Pyrevit_Extension_Manager_02.png" >
 </div>
 
 9. "UMNFT" is currently not a private repository. But that can change, therefore the check box "Git repository is private" has not to be checked! If you want to get the access token, after it is private, contact [me](mailto:erich.domme@rwth-aachen.de)!
 
 <div align="center">
-<img src="./img/Pyrevit_Extension_Manager_Step03.png" >
+<img src="./img/Pyrevit_Extension_Manager_03.png" >
 </div>
 
 10. In contrast to me, "UMNFT" will not yet be installed in your Revit. You should do this by clicking on Install Extension.
 
 <div align="center">
-<img src="./img/Pyrevit_Extension_Manager_Step04.png" >
+<img src="./img/Pyrevit_Extension_Manager_04.png" >
 </div>
 
 11. Done! You should now have "UMNFT" in Revit!
