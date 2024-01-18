@@ -22,7 +22,7 @@ from System.IO import StreamReader
 # Function to export IFC
 def export_to_ifc(doc, export_folder, filename):
     ifc_options = IFCExportOptions()
-    ifc_options.FileVersion = IFCVersion.IFC4x3
+    ifc_options.FileVersion = IFCVersion.IFC2x3
     doc.Export(export_folder, filename, ifc_options)
 
 
