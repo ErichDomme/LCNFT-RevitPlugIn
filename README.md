@@ -133,7 +133,7 @@ In order for UMNFT to run on your computer, you will need to do a few installati
 11. Done! You should now have "UMNFT" in Revit!
 
 ## Project Status
-<span style="color:green">**Version 0.0.1 published!**</span>
+<span style="color:green">**Version 1.0.0 published!**</span>
 <!-- _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.-->
 
 ## Acknowledgements
